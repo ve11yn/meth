@@ -12,8 +12,12 @@ interface UploadResponse {
     format: string;
     mode: string;
   };
+  equation?: string;
+  parsed_equation?: string;
+  result?: string;
   error?: string;
 }
+
 
 const FileUploader = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -164,6 +168,14 @@ const FileUploader = () => {
                 <div className="text-xs text-green-300 space-y-1">
                   <p>Format: {uploadResult.image_info.format}</p>
                   <p>Dimensions: {uploadResult.image_info.width} × {uploadResult.image_info.height}</p>
+                </div>
+              )}
+
+              {uploadResult && uploadResult.equation && (
+                <div className="text-xs text-green-300 space-y-1">
+                  <p>Equation: {uploadResult.equation}</p>
+                  <p>Parsed: {uploadResult.parsed_equation}</p>
+                  <p>Result: {uploadResult.result}</p>
                 </div>
               )}
               <button
